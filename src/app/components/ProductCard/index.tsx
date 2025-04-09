@@ -10,7 +10,14 @@ const ProductCard: React.FC<Product> = ({ image, title, description }) => {
   return (
     <div className={styles.productCard}>
       <div className={styles.productImageWrap}>
-        <Image src={image} alt={title} className={styles.productImage} width={300} height={300} />
+        <Image 
+          src={image} 
+          alt={title} 
+          className={styles.productImage} 
+          width={300} 
+          height={300}
+          priority={false}
+        />
       </div>
 
       <div className={styles.productInfo}>
