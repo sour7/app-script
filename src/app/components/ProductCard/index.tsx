@@ -16,10 +16,9 @@ const ProductCard: React.FC<Product> = ({ image, title, description }) => {
           className={styles.productImage} 
           width={300} 
           height={300}
-          priority={false}
+          priority={true}
         />
       </div>
-
       <div className={styles.productInfo}>
         <div className={styles.productHeader}>
           <span className={styles.productName}>{title}</span>

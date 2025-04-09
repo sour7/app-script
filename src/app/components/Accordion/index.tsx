@@ -1,7 +1,6 @@
-// components/Accordion.tsx
-
 import React from 'react';
 import styles from './Accordion.module.css';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 interface AccordionProps {
   title: string;
@@ -15,7 +14,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, isOpen, toggleOpen, childr
     <div className={styles.column}>
       <div className={styles.accordionHeader} onClick={toggleOpen}>
         <h4>{title}</h4>
-        <span className={styles.toggleIcon}>{isOpen ? '-' : '+'}</span>
+        <span className={styles.toggleIcon}>{isOpen ? <BiChevronDown/> : <BiChevronUp/>}</span>
       </div>
       {isOpen && (
         <div className={`${styles.accordionContent} ${styles.show}`}>
