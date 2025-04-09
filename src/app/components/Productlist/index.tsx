@@ -17,7 +17,6 @@ export interface Product {
     rate: number;
     count: number;
   };
-  isOutOfStock?: boolean;
 }
 
 export default function ProductList() {
@@ -38,7 +37,10 @@ export default function ProductList() {
           description: item.description,
           price: item.price,
           category: item.category,
-          rating: item.rating.rate,
+          rating: {
+            rate: item.rating.rate,
+            count: item.rating.count,
+          },
         }));
         setProducts(mappedData);
       })
@@ -49,12 +51,24 @@ export default function ProductList() {
     setShowFilter((prev) => !prev);
   };
 
-  // Handle user changing "Recommended" sort dropdown
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setSortOption(selectedValue);
-    // If you want to sort the products array, do so here:
-    // Example: sort by price low to high, etc.
+    const sortedProducts = [...products].sort((a, b) => {
+      if (selectedValue === 'priceLowToHigh') {
+        return a.price - b.price;
+      } else if (selectedValue === 'priceHighToLow') {
+        return b.price - a.price;
+      } else if (selectedValue === 'ratingHighToLow') {
+        return (b.rating?.rate || 0) - (a.rating?.rate || 0);
+      } else if (selectedValue === 'newestFirst') {
+        return b.id - a.id; // Assuming newer products have higher IDs
+      } else if (selectedValue === 'popular') {
+        return (b.rating?.rate || 0) - (a.rating?.rate || 0);
+      }
+      return 0;
+    });
+    setProducts(sortedProducts);
   };
 
   return (
@@ -77,10 +91,10 @@ export default function ProductList() {
             onChange={handleSortChange}
           >
             <option value="recommended">Recommended</option>
-            <option value="newest">Newest First</option>
+            <option value="newestFirst">Newest First</option>
             <option value="popular">Popular</option>
-            <option value="lowToHigh">Price: Low to High</option>
-            <option value="highToLow">Price: High to Low</option>
+            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="priceHighToLow">Price: High to Low</option>
           </select>
         </div>
       </div>

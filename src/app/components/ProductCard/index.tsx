@@ -19,7 +19,6 @@ const ProductCard: React.FC<Product> = ({ image, title, description }) => {
             <AiOutlineHeart size={20} />
           </button>
         </div>
-
         {description && <p className={styles.productDescription}>{description}</p>}
 
         <p className={styles.signInPrompt}>
