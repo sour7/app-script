@@ -82,9 +82,9 @@
     font-size: 1rem;
   }
   
-  /* Mobile styles */
+
   @media (max-width: 768px) {
-    /* Top bar: only show first item */
+    
     .topBarItem:not(:first-child) {
       display: none;
     }

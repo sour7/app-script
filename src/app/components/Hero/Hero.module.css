@@ -1,23 +1,22 @@
-/* Overall hero container */
+
 .heroContainer {
     width: 100%;
-    padding: 4rem 1rem; /* Vertical & horizontal padding */
+    padding: 4rem 1rem; 
     display: flex;
     justify-content: center;
     text-align: center;
   }
   
-  /* Container for title and subtitle with the same width */
+
   .heroContent {
-    max-width: 700px; /* Adjust this value for your desired width */
+    max-width: 700px; 
     width: 100%;
   }
-  
-  /* Hero title styling */
-  .heroTitle {
-    font-size: 2.2rem;  /* Adjust as needed */
+
+  .heroTitle { /* Adjust as needed */
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
+    font-size: 2.2rem;
     text-transform: uppercase;
   }
   
