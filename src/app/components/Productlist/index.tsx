@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Productlist.module.css';
 import FilterSidebar from '../FilterSidebar';
 import ProductCard from '../ProductCard';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 export interface Product {
   id: number;
@@ -23,7 +24,8 @@ export default function ProductList() {
   const [showFilter, setShowFilter] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>('recommended');
-
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+ 
   // Fetch data from Fakestore API
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -71,17 +73,37 @@ export default function ProductList() {
     setProducts(sortedProducts);
   };
 
+  const handleCategoryChange = (categories: string[]) => {
+    setSelectedCategory(categories);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    selectedCategory.length === 0 || selectedCategory.includes('All') || selectedCategory.includes(product.category)
+  );
+
+  console.log('Selected Categories:', selectedCategory);
+  console.log('Filtered Products:', filteredProducts);
+
   return (
     <div className={styles.productListingPage}>
       {/* Top Bar */}
       <div className={styles.topBar}>
         <div className={styles.itemsCount}>
-          {products.length} items
+          {filteredProducts.length} items
         </div>
-
-        <button className={styles.hideFilterBtn} onClick={toggleFilter}>
-          {showFilter ? 'Hide Filter' : 'Show Filter'}
-        </button>
+        <div className={styles.hideFilterBtn} onClick={toggleFilter}>
+          {showFilter ? (
+            <span className={styles.filterBtnContent}>
+              <BiChevronLeft size={30} />
+              <span>Hide Filter</span>
+            </span>
+          ) : (
+            <span className={styles.filterBtnContent}>
+              <BiChevronRight size={30} />
+              <span>Show Filter</span>
+            </span>
+          )}
+        </div>
 
         {/* Recommended Dropdown */}
         <div className={styles.recommended}>
@@ -103,13 +125,13 @@ export default function ProductList() {
       <div className={styles.contentWrapper}>
         {showFilter && (
           <aside className={styles.sidebar}>
-            <FilterSidebar />
+            <FilterSidebar onCategoryChange={handleCategoryChange} />
           </aside>
         )}
 
         <section className={styles.productsSection}>
           <div className={styles.productsGrid}>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>

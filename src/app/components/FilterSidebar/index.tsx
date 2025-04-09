@@ -11,6 +11,10 @@ interface FilterCategory {
 
 const FILTERS: FilterCategory[] = [
   {
+    title: 'CATEGORY',
+    options: [ "men's clothing", "women's clothing", 'jewelery', 'electronics'],
+  },
+  {
     title: 'CUSTOMIZABLE',
     options: ['Yes', 'No'],
   },
@@ -44,11 +48,24 @@ const FILTERS: FilterCategory[] = [
   },
 ];
 
-const FilterSidebar: React.FC = () => {
+interface FilterSidebarProps {
+  onCategoryChange: (category: string[]) => void;
+}
+
+const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
   const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const handleToggle = (categoryTitle: string) => {
     setOpenCategory((prev) => (prev === categoryTitle ? null : categoryTitle));
+  };
+
+  const handleCategorySelect = (option: string) => {
+    const updatedCategories = selectedCategories.includes(option)
+      ? selectedCategories.filter((category) => category !== option)
+      : [...selectedCategories, option];
+    setSelectedCategories(updatedCategories);
+    onCategoryChange(updatedCategories);
   };
 
   return (
@@ -71,8 +88,11 @@ const FilterSidebar: React.FC = () => {
                 <label key={option} className={styles.optionLabel}>
                   <input
                     type="checkbox"
+                    name="category"
                     className={styles.optionCheckbox}
                     value={option}
+                    checked={selectedCategories.includes(option)}
+                    onChange={() => handleCategorySelect(option)}
                   />
                   <span>{option}</span>
                 </label>
