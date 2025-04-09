@@ -29,9 +29,10 @@
     background-color: white;
   }
   
-  .logoSection{
+  .logoSection {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   
   .hamburgerIcon {
@@ -42,7 +43,7 @@
   .centerLogoText {
     font-weight: 700;
     font-size: 2rem;
-    margin-left: 200px;
+    margin-left: 0;
   }
   
   .iconSection {
@@ -103,9 +104,7 @@
       display: block;
     }
   
-    .centerLogoText {
-      display: none;
-    }
+  
   
     .userIcon,
     .language {
