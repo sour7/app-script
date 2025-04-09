@@ -29,6 +29,10 @@
     background-color: white;
   }
   
+  .logoSection{
+    display: flex;
+    align-items: center;
+  }
   
   .hamburgerIcon {
     font-size: 1.5rem;
@@ -92,6 +96,7 @@
   
     .headerRow {
       padding: 1rem 1.5rem;
+      border-bottom: 1px solid #eee;
     }
   
     .hamburgerIcon {

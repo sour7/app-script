@@ -13,13 +13,11 @@ import { FaReact } from "react-icons/fa";
 const Navbar: React.FC = () => {
   return (
     <>
-      {/* Top Black Bar */}
       <div className={styles.topBar}>
         <div className={styles.topBarItem}>
           <FiGrid className={styles.icon} />
           <span>Lorem ipsum dolor</span>
         </div>
-        {/* Other items are still in DOM, but will be hidden via CSS */}
         <div className={styles.topBarItem}>
           <FiGrid className={styles.icon} />
           <span>Lorem ipsum dolor</span>
@@ -30,7 +28,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Header Row */}
       <div className={styles.headerRow}>
         <div className={styles.logoSection}>
           <FiMenu className={styles.hamburgerIcon} />
@@ -50,7 +47,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Links Row */}
       <nav className={styles.navLinksRow}>
         <ul className={styles.navLinks}>
           <li><a href="#">Shop</a></li>
