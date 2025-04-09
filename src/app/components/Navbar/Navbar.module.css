@@ -21,32 +21,24 @@
   
   /* Header row */
   .headerRow {
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 3rem 1rem;
+    padding: 1rem 2rem;
     background-color: white;
   }
   
-  .logoSection {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
   
   .hamburgerIcon {
     font-size: 1.5rem;
     display: none; /* mobile only */
   }
   
-  .logoIcon {
-    height: 40px;
-    width: 40px;
-  }
-  
   .centerLogoText {
     font-weight: 700;
     font-size: 2rem;
+    margin-left: 200px;
   }
   
   .iconSection {

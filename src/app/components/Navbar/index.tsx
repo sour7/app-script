@@ -8,6 +8,7 @@ import {
   FiGrid,
   FiMenu,
 } from "react-icons/fi";
+import { FaReact } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
   return (
@@ -33,7 +34,7 @@ const Navbar: React.FC = () => {
       <div className={styles.headerRow}>
         <div className={styles.logoSection}>
           <FiMenu className={styles.hamburgerIcon} />
-          <img src="/logo.svg" alt="Logo" className={styles.logoIcon} />
+          <FaReact size={30} />
         </div>
 
         <div className={styles.centerLogoText}>LOGO</div>

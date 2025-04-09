@@ -5,6 +5,7 @@ import styles from './Productlist.module.css';
 import FilterSidebar from '../FilterSidebar';
 import ProductCard from '../ProductCard';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import useIsMobile from '../../hooks/useIsMobile';
 
 export interface Product {
   id: number;
@@ -25,7 +26,9 @@ export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>('recommended');
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
- 
+  const [showOverlayFilter, setShowOverlayFilter] = useState<boolean>(false);
+  const isMobile = useIsMobile();
+
   // Fetch data from Fakestore API
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -51,6 +54,10 @@ export default function ProductList() {
 
   const toggleFilter = () => {
     setShowFilter((prev) => !prev);
+  };
+
+  const toggleOverlayFilter = () => {
+    setShowOverlayFilter((prev) => !prev);
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -92,7 +99,8 @@ export default function ProductList() {
           {filteredProducts.length} items
         </div>
         <div className={styles.hideFilterBtn} onClick={toggleFilter}>
-          {showFilter ? (
+     {isMobile === false ? (
+          showFilter ? (
             <span className={styles.filterBtnContent}>
               <BiChevronLeft size={30} />
               <span>Hide Filter</span>
@@ -102,8 +110,11 @@ export default function ProductList() {
               <BiChevronRight size={30} />
               <span>Show Filter</span>
             </span>
-          )}
-        </div>
+          )
+        ) : (
+          <div className={styles.filterBtn} onClick={toggleOverlayFilter}>FILTERS</div>
+        )}
+      </div>
 
         {/* Recommended Dropdown */}
         <div className={styles.recommended}>
@@ -125,7 +136,10 @@ export default function ProductList() {
       <div className={styles.contentWrapper}>
         {showFilter && (
           <aside className={styles.sidebar}>
-            <FilterSidebar onCategoryChange={handleCategoryChange} />
+            {
+                isMobile=== false &&
+                    <FilterSidebar onCategoryChange={handleCategoryChange} />
+            }
           </aside>
         )}
 
@@ -135,6 +149,11 @@ export default function ProductList() {
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
+          {isMobile && showOverlayFilter && (
+            <div className={styles.overlayFilter}>
+              <FilterSidebar onCategoryChange={handleCategoryChange} />
+            </div>
+          )}
         </section>
       </div>
     </div>

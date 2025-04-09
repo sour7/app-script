@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './ProductCard.module.css';
 import { Product } from '../Productlist';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
 
 const ProductCard: React.FC<Product> = ({ image, title, description }) => {
+  const [isWishlist, setIsWishlist] = useState<boolean>(false);
   return (
     <div className={styles.productCard}>
       <div className={styles.productImageWrap}>
@@ -15,8 +16,8 @@ const ProductCard: React.FC<Product> = ({ image, title, description }) => {
       <div className={styles.productInfo}>
         <div className={styles.productHeader}>
           <span className={styles.productName}>{title}</span>
-          <button className={styles.wishlistButton} aria-label="Add to wishlist">
-            <AiOutlineHeart size={20} />
+          <button className={styles.wishlistButton} aria-label="Add to wishlist" onClick={() => setIsWishlist(!isWishlist)}>
+            {isWishlist ? <AiFillHeart size={20} color= "red" /> : <AiOutlineHeart size={20} />}
           </button>
         </div>
         {description && <p className={styles.productDescription}>{description}</p>}

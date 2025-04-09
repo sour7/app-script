@@ -102,5 +102,53 @@
     .itemsCount {
       display: none;
     }
+
+    .productsSection {
+      position: relative;
+    }
+
+    .overlayFilter {
+      position: absolute;
+    
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      z-index: 1000; /* Ensure it appears above other content */
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .overlayFilter > div {
+      background-color: white;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .filterBtn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .topBar{
+      border-top: 1px solid #747474;
+      border-bottom: 1px solid #747474;
+      padding: 0.5rem 1rem;
+
+    }
+
+    .sortSelect{
+      border: none;
+      text-transform: uppercase;
+      border-left: 1px solid #747474;
+    }
   }
-  
