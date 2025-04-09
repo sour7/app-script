@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Inria_Sans } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,24 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// import { Inter } from 'next/font/google'
+ 
+// // If loading a variable font, you don't need to specify the font weight
+// const inter = Inter({ subsets: ['latin'] })
+ 
+// export default function MyApp({ Component, pageProps }) {
+//   return (
+//     <main className={inter.className}>
+//       <Component {...pageProps} />
+//     </main>
+//   )
+// }
+
+const InriaSans = Inria_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -37,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={InriaSans.className}>
         <Navbar  />
         {children}
         <Footer />
@@ -45,3 +64,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
