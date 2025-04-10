@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from './Productlist.module.css';
 import FilterSidebar from '../FilterSidebar';
 import ProductCard from '../ProductCard';
-import { BiChevronLeft, BiChevronRight, BiCheck } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiCheck, BiChevronDown } from 'react-icons/bi';
 import useIsMobile from '../../hooks/useIsMobile';
 
 export interface Product {
@@ -131,6 +131,7 @@ export default function ProductList() {
           <div className={styles.customDropdown}>
             <div className={styles.selectedOption}>
               <span>{sortOptions.find((option) => option.value === sortOption)?.label}</span>
+              <BiChevronDown/>
             </div>
             <div className={styles.dropdownOptions}>
               {sortOptions.map((option) => (

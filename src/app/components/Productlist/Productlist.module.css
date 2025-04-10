@@ -40,6 +40,7 @@
   /* RECOMMENDED DROPDOWN */
   .recommended {
     margin-left: auto; /* push to far right */
+    border: 1px solid #ccc ;
   }
   
   .sortSelect {
@@ -151,6 +152,12 @@
       text-transform: uppercase;
       border-left: 1px solid #747474;
       background-color: white;
+    }
+
+    .recommended{
+      border: none;
+      border-left: 1px solid #ccc
+    
     }
   }
 
