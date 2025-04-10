@@ -1,7 +1,18 @@
+.breadcrumb {
+  font-size: 0.8rem;
+  color: #585858;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  font-weight: 700;
+}
+
+.breadcrumb span:first-child {
+  color: #afafaf;
+}
 
 .heroContainer {
     width: 100%;
-    padding: 4rem 1rem; 
+    padding: 1rem; 
     display: flex;
     justify-content: center;
     text-align: center;

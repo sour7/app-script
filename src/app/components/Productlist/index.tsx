@@ -88,9 +88,6 @@ export default function ProductList() {
     selectedCategory.length === 0 || selectedCategory.includes('All') || selectedCategory.includes(product.category)
   );
 
-  console.log('Selected Categories:', selectedCategory);
-  console.log('Filtered Products:', filteredProducts);
-
   return (
     <div className={styles.productListingPage}>
       {/* Top Bar */}
