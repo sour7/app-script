@@ -171,6 +171,7 @@
     border-radius: 4px;
     width: 100%; /* Ensure it matches the dropdown width */
     box-sizing: border-box; /* Include padding in width calculation */
+    border:none;
   }
   
   .dropdownOptions {
