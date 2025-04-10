@@ -72,7 +72,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
           type="checkbox"
           name="customizable"
           className={styles.optionCheckbox}
-          // Add any necessary state handling for the customizable checkbox
         />
         <span>Customizable</span>
       </label>
@@ -105,7 +104,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
               ))}
             </div>
           )}
+           <hr />
         </div>
+       
       ))}
     </div>
   );
