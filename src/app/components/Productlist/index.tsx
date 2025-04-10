@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './Productlist.module.css';
 import FilterSidebar from '../FilterSidebar';
 import ProductCard from '../ProductCard';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiCheck } from 'react-icons/bi';
 import useIsMobile from '../../hooks/useIsMobile';
 
 export interface Product {
@@ -28,13 +28,26 @@ export default function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [showOverlayFilter, setShowOverlayFilter] = useState<boolean>(false);
   const isMobile = useIsMobile();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const sortOptions = [
+    { value: 'recommended', label: 'Recommended', image: '/images/recommended.png' },
+    { value: 'newestFirst', label: 'Newest First', image: '/images/newest.png' },
+    { value: 'popular', label: 'Popular', image: '/images/popular.png' },
+    { value: 'priceLowToHigh', label: 'Price: Low to High', image: '/images/low-to-high.png' },
+    { value: 'priceHighToLow', label: 'Price: High to Low', image: '/images/high-to-low.png' },
+  ];
+
+  const handleOptionClick = (value: string) => {
+    setSortOption(value);
+    handleSortChange({ target: { value } } as React.ChangeEvent<HTMLSelectElement>);
+  };
 
   // Fetch data from Fakestore API
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
       .then((data) => {
-        // Map the data to our local interface
         const mappedData: Product[] = data.map((item: Product) => ({
           id: item.id,
           title: item.title,
@@ -71,7 +84,7 @@ export default function ProductList() {
       } else if (selectedValue === 'ratingHighToLow') {
         return (b.rating?.rate || 0) - (a.rating?.rate || 0);
       } else if (selectedValue === 'newestFirst') {
-        return b.id - a.id; // Assuming newer products have higher IDs
+        return b.id - a.id;
       } else if (selectedValue === 'popular') {
         return (b.rating?.rate || 0) - (a.rating?.rate || 0);
       }
@@ -96,36 +109,45 @@ export default function ProductList() {
           {filteredProducts.length} items
         </div>
         <div className={styles.hideFilterBtn} onClick={toggleFilter}>
-     {isMobile === false ? (
-          showFilter ? (
-            <span className={styles.filterBtnContent}>
-              <BiChevronLeft size={30} />
-              <span>Hide Filter</span>
-            </span>
+          {isMobile === false ? (
+            showFilter ? (
+              <span className={styles.filterBtnContent}>
+                <BiChevronLeft size={30} />
+                <span>Hide Filter</span>
+              </span>
+            ) : (
+              <span className={styles.filterBtnContent}>
+                <BiChevronRight size={30} />
+                <span>Show Filter</span>
+              </span>
+            )
           ) : (
-            <span className={styles.filterBtnContent}>
-              <BiChevronRight size={30} />
-              <span>Show Filter</span>
-            </span>
-          )
-        ) : (
-          <div className={styles.filterBtn} onClick={toggleOverlayFilter}>FILTERS</div>
-        )}
-      </div>
+            <div className={styles.filterBtn} onClick={toggleOverlayFilter}>FILTERS</div>
+          )}
+        </div>
 
         {/* Recommended Dropdown */}
-        <div className={styles.recommended}>
-          <select
-            className={styles.sortSelect}
-            value={sortOption}
-            onChange={handleSortChange}
-          >
-            <option value="recommended">Recommended</option>
-            <option value="newestFirst">Newest First</option>
-            <option value="popular">Popular</option>
-            <option value="priceLowToHigh">Price: Low to High</option>
-            <option value="priceHighToLow">Price: High to Low</option>
-          </select>
+        <div className={styles.recommended} ref={dropdownRef}>
+          <div className={styles.customDropdown}>
+            <div className={styles.selectedOption}>
+              <span>{sortOptions.find((option) => option.value === sortOption)?.label}</span>
+            </div>
+            <div className={styles.dropdownOptions}>
+              {sortOptions.map((option) => (
+                <div
+                  key={option.value}
+                  className={styles.dropdownOption}
+                  onClick={() => handleOptionClick(option.value)}
+                >
+                   {sortOption === option.value && (
+                    <BiCheck className={styles.tickIcon} />
+                  )}
+                  <span>{option.label}</span>
+                 
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -133,10 +155,7 @@ export default function ProductList() {
       <div className={styles.contentWrapper}>
         {showFilter && (
           <aside className={styles.sidebar}>
-            {
-                isMobile=== false &&
-                    <FilterSidebar onCategoryChange={handleCategoryChange} />
-            }
+            {isMobile === false && <FilterSidebar onCategoryChange={handleCategoryChange} />}
           </aside>
         )}
 
