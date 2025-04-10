@@ -15,10 +15,6 @@ const FILTERS: FilterCategory[] = [
     options: [ "men's clothing", "women's clothing", 'jewelery', 'electronics'],
   },
   {
-    title: 'CUSTOMIZABLE',
-    options: ['Yes', 'No'],
-  },
-  {
     title: 'IDEAL FOR',
     options: ['Men', 'Women', 'Baby & Kids'],
   },
@@ -70,6 +66,15 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
 
   return (
     <div className={styles.filterSidebar}>
+      <label className={styles.optionLabel}>
+        <input
+          type="checkbox"
+          name="customizable"
+          className={styles.optionCheckbox}
+          // Add any necessary state handling for the customizable checkbox
+        />
+        <span>Customizable</span>
+      </label>
       {FILTERS.map((filter) => (
         <div key={filter.title} className={styles.filterGroup}>
           <button
