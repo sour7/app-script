@@ -49,12 +49,22 @@
     margin-bottom: 0.75rem;
     cursor: pointer;
     text-transform: capitalize;
-    font-size: 1rem;
-    font-weight: 600;
-    background: #fff;
-    padding: 1rem;
-    width: 100%;
-    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+.customizable {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #fff;
+  padding: 1rem;
+  width: 100%;
+text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
 }
 
 .optionCheckbox {

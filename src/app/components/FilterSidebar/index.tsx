@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './FilterSidebar.module.css';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 
 // Filter category structure
 interface FilterCategory {
@@ -66,7 +67,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
 
   return (
     <div className={styles.filterSidebar}>
-      <label className={styles.optionLabel}>
+      <label className={styles.customizable}>
         <input
           type="checkbox"
           name="customizable"
@@ -83,7 +84,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onCategoryChange }) => {
           >
             {filter.title}
             <span className={styles.chevron}>
-              {openCategory === filter.title ? '▲' : '▼'}
+              {openCategory === filter.title ? <BiChevronUp/>: <BiChevronDown/>}
             </span>
           </button>
 
